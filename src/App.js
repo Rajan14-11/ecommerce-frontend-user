@@ -8,6 +8,7 @@ import { isUserLoggedIn, updateCart} from "./actions";
 import ProductDetailsPage from "./containers/ProductDetailsPage";
 import CartPage from "./containers/CartPage";
 import CheckoutPage from "./containers/CheckoutPage";
+import OrderPage from "./containers/OrderPage";
 
 function App() {
 const dispatch = useDispatch()
@@ -31,6 +32,7 @@ useEffect(()=>{
           <Route path="/" element={<HomePage />}></Route>
           <Route path="/cart" element={<CartPage />}></Route>
           <Route path="/checkout" element={<CheckoutPage/>}></Route>
+          <Route path="/account/orders" element={<OrderPage/>}></Route>
           <Route path="/:slug" element={<ProductListPage />}></Route>
           <Route path="/:productslug/:productId/p" element={<ProductDetailsPage />}></Route>
         </Routes>

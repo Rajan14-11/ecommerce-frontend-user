@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getAddress, getCartItems } from "../../actions";
+import { useNavigate } from "react-router-dom";
+import { addOrder, getAddress, getCartItems } from "../../actions";
 import Layout from "../../components/Layout";
 import {
   Anchor,
@@ -8,17 +9,12 @@ import {
   MaterialInput,
 } from "../../components/MaterialUI";
 import PriceDetails from "../../components/PriceDetails";
-// import PriceDetails from "../../components/PriceDetails";
 import Card from "../../components/UI/Card";
 import CartPage from "../CartPage";
 import AddressForm from "./AddressForm";
 
 import "./style.css";
 
-/**
- * @author
- * @function CheckoutPage
- **/
 
 const CheckoutStep = (props) => {
   return (
@@ -110,6 +106,8 @@ const CheckoutPage = (props) => {
   const cart = useSelector((state) => state.cart);
   const dispatch = useDispatch();
 
+  const navigate = useNavigate();
+
   const onAddressSubmit = (addr) => {
     setSelectedAddress(addr);
     setConfirmAddress(true);
@@ -166,8 +164,9 @@ const CheckoutPage = (props) => {
       paymentType: "cod",
     };
 
-    console.log(payload);
-    // dispatch(addOrder(payload));
+    // console.log(payload);
+    dispatch(addOrder(payload));
+    navigate('/')
     setConfirmOrder(true);
   };
 

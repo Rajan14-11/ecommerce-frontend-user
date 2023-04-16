@@ -28,7 +28,6 @@ const Header = (props) => {
   const [error, setError] = useState("");
   const auth = useSelector((state) => state.auth);
   const dispatch = useDispatch();
-  console.log(auth.user)
 
   // state cart value
   // const cart = useSelector((state) => state.cart);
@@ -73,7 +72,7 @@ const Header = (props) => {
   const renderLoggedInMenu = () => {
     return (
       <DropdownMenu
-        menu={<a className="fullName">{auth.user.firstName}</a>}
+        menu={<a className="fullName">{auth.user.fullName}</a>}
         menus={[
           { label: "My Profile", href: "", icon: null },
           { label: "SuperCoin Zone", href: "", icon: null },

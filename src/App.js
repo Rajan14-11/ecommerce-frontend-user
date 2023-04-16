@@ -7,6 +7,7 @@ import {useSelector,useDispatch} from "react-redux"
 import { isUserLoggedIn, updateCart} from "./actions";
 import ProductDetailsPage from "./containers/ProductDetailsPage";
 import CartPage from "./containers/CartPage";
+import CheckoutPage from "./containers/CheckoutPage";
 
 function App() {
 const dispatch = useDispatch()
@@ -29,6 +30,7 @@ useEffect(()=>{
         <Routes>
           <Route path="/" element={<HomePage />}></Route>
           <Route path="/cart" element={<CartPage />}></Route>
+          <Route path="/checkout" element={<CheckoutPage/>}></Route>
           <Route path="/:slug" element={<ProductListPage />}></Route>
           <Route path="/:productslug/:productId/p" element={<ProductDetailsPage />}></Route>
         </Routes>

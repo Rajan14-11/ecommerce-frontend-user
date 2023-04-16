@@ -48,6 +48,7 @@ export const addToCart = (product, newQty = 1) => {
           },
         ],
       };
+     
       const res = await axios.post("user/cart/addtocart", payload);
       if (res.status === 201) {
         dispatch(getCartItems());
@@ -89,6 +90,8 @@ export const updateCart = () => {
             dispatch(getCartItems());
           }
         }
+      } else {
+        dispatch(getCartItems());
       }
     } else {
       if (cartItems) {

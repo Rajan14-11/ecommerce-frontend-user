@@ -6,18 +6,18 @@ import { IoIosArrowForward, IoIosStar, IoMdCart } from "react-icons/io";
 import { BiRupee } from "react-icons/bi";
 import { AiFillThunderbolt } from "react-icons/ai";
 import { MaterialButton } from "../../components/MaterialUI";
-import { useParams , useNavigate } from "react-router-dom";
+import { useParams , useNavigate, Link } from "react-router-dom";
 import "./style.css";
 import { addToCart } from "../../actions";
 
 const ProductDetailsPage = () => {
   const dispatch = useDispatch();
   const product = useSelector((state) => state.product);
-  console.log(product)
+  // console.log(product)
 
   const navigate = useNavigate()
 
-  const { productId } = useParams();
+  const { productId} = useParams();
   useEffect(() => {
     const payload = {
       params: {
@@ -38,7 +38,7 @@ const ProductDetailsPage = () => {
         <div className="flexRow">
           <div className="verticalImageStack">
             {product.productDetails.productPictures.map((thumb, index) => (
-              <div className="thumbnail">
+              <div key={index} className="thumbnail">
                 <img src={thumb.img} alt={thumb.img} />
               </div>
             ))}
@@ -65,7 +65,7 @@ const ProductDetailsPage = () => {
                   const { _id, name, price } = product.productDetails;
                   const img = product.productDetails.productPictures[0].img;
                   dispatch(addToCart({ _id, name, price, img }));
-                  navigate('/cart')
+                  navigate("/cart");
                 }}
               />
               <MaterialButton
@@ -85,8 +85,10 @@ const ProductDetailsPage = () => {
           <div className="breed">
             <ul>
               <li>
-                <a href="#">Home</a>
-                <IoIosArrowForward />
+                <Link href="/">
+                  Home
+                  <IoIosArrowForward />
+                </Link>
               </li>
               <li>
                 <a href="#">Mobiles</a>
@@ -161,9 +163,8 @@ const ProductDetailsPage = () => {
           </div>
         </div>
       </div>
-  </Layout>
-
-  )
+    </Layout>
+  );
 };
 
 export default ProductDetailsPage;

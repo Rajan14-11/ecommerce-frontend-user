@@ -10,7 +10,6 @@ export const getProductBySlug = (slug) => {
         payload: res.data,
       });
     }
-    console.log(res);
   };
 };
 
@@ -34,7 +33,6 @@ export const getProductPage = (payload) => {
           payload: { error },
         });
       }
-      console.log(res);
     } catch (error) {
       console.log({ error });
     }

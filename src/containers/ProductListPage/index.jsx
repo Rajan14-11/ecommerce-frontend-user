@@ -1,6 +1,7 @@
 import React from "react";
 import Layout from "../../components/Layout";
 import getParams from "../../utils/getParams";
+import ClothingAndAccessories from "./ClothingAndAccessories";
 import ProductPage from "./ProductPage/ProductPage";
 import ProductStore from "./ProductStore";
 import './style.css'
@@ -8,7 +9,7 @@ import './style.css'
 const ProductListPage = (props) => {
   const renderProduct = () => {
     const params = getParams(window.location.search);
-    console.log(params.type);
+    // console.log(params.type);
     let content = null;
     switch (params.type) {
       case "store":
@@ -16,10 +17,9 @@ const ProductListPage = (props) => {
         break;
       case "page":
         content = <ProductPage {...props} />;
-        console.log(content);
         break;
       default:
-        content = null;
+        content = <ClothingAndAccessories {...props}/>;
     }
     return content;
   };

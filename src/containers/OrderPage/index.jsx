@@ -10,11 +10,6 @@ import { IoIosArrowForward } from "react-icons/io";
 import "./style.css";
 import { Breed } from "../../components/MaterialUI";
 
-/**
- * @author
- * @function OrderPage
- **/
-
 const OrderPage = (props) => {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user);
@@ -23,7 +18,7 @@ const OrderPage = (props) => {
     dispatch(getOrders());
   }, []);
 
-  console.log(user);
+  // console.log(user);
 
   return (
     <Layout>

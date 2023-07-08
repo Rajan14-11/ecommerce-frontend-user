@@ -11,7 +11,8 @@ import {
 } from "../MaterialUI";
 import { useDispatch, useSelector } from "react-redux";
 import { login, signout, getCartItems, signup as _signup } from "../../actions";
-// import Cart from "../UI/Cart";
+import Cart from "../UI/Cart";
+import {useNavigate} from "react-router-dom"
 
 /**
  * @author
@@ -28,9 +29,10 @@ const Header = (props) => {
   const [error, setError] = useState("");
   const auth = useSelector((state) => state.auth);
   const dispatch = useDispatch();
+  const navigate = useNavigate()
 
   // state cart value
-  // const cart = useSelector((state) => state.cart);
+  const cart = useSelector((state) => state.cart);
 
   const userSignup = () => {
     const user = { firstName, lastName, email, password };
@@ -47,16 +49,17 @@ const Header = (props) => {
   };
 
   const userLogin = () => {
-    dispatch(login({ email, password }));
+    // dispatch(login({ email, password }));
     if (signup) {
       userSignup();
     } else {
-      // dispatch(login({ email, password }));
+      dispatch(login({ email, password }));
     }
   };
 
   const logout = () => {
     dispatch(signout());
+    navigate('/')
   };
 
   useEffect(() => {
@@ -115,9 +118,9 @@ const Header = (props) => {
             label: "Orders",
             href: `/account/orders`,
             icon: null,
-            // onClick: () => {
-            //   !auth.authenticate && setLoginModal(true);
-            // },
+            onClick: () => {
+              !auth.authenticate && setLoginModal(true);
+            },
           },
           { label: "Wishlist", href: "", icon: null },
           { label: "Rewards", href: "", icon: null },
@@ -127,10 +130,10 @@ const Header = (props) => {
           <div className="firstmenu">
             <span>New Customer?</span>
             <a
-              // onClick={() => {
-              //   setLoginModal(true);
-              //   setSignup(true);
-              // }}
+              onClick={() => {
+                setLoginModal(true);
+                setSignup(true);
+              }}
               style={{ color: "#2874f0" }}
             >
               Sign Up
@@ -264,7 +267,7 @@ const Header = (props) => {
           />
           <div>
             <a href={`/cart`} className="cart">
-              {/* <Cart count={Object.keys(cart.cartItems).length} /> */}
+              <Cart count={Object.keys(cart.cartItems).length} />
               <span style={{ margin: "0 10px" }}>Cart</span>
             </a>
           </div>

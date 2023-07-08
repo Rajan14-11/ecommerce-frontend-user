@@ -9,11 +9,20 @@ import Card from "../../components/UI/Card";
 import CartItem from "./CartItem";
 import "./style.css";
 
+/*
+Before Login
+Add product to cart
+save in localStorage
+when try to checkout ask for credentials and
+if logged in then add products to users cart database from localStorage
+
+
+*/
+
 const CartPage = (props) => {
   const dispatch = useDispatch();
   const cart = useSelector((state) => state.cart);
   const auth = useSelector((state) => state.auth);
-  // const cartItems = cart.cartItems
   const [cartItems, setCartItems] = useState(cart.cartItems);
 
   const navigate = useNavigate();
@@ -28,15 +37,20 @@ const CartPage = (props) => {
     }
   }, [auth.authenticate]);
 
-  const onQuantityIncrement = (_id, qty) => {
+  const onQuantityIncrement = (_id) => {
     const { name, price, img } = cartItems[_id];
     dispatch(addToCart({ _id, name, price, img }, 1));
   };
 
-  const onQuantityDecrement = (_id, qty) => {
+  const onQuantityDecrement = (_id) => {
     const { name, price, img } = cartItems[_id];
     dispatch(addToCart({ _id, name, price, img }, -1));
   };
+
+  // const onRemoveCartItem = (_id) => {
+  //   dispatch(removeCartItem({ productId: _id }));
+  // };
+
 
   if(props.onlyCartItems){
     return ( <>
@@ -65,6 +79,7 @@ const CartPage = (props) => {
               cartItem={cartItems[key]}
               onQuantityInc={onQuantityIncrement}
               onQuantityDec={onQuantityDecrement}
+              // onRemoveCartItem={onRemoveCartItem}
             />
           ))}
           <div
